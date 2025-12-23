@@ -160,7 +160,6 @@ header.scrolled {
     vertical-align: middle;
 }
 
-/* CORREÇÃO 1: ALINHAMENTO DO MENU DESKTOP */
 .header-container nav {
     display: flex;
     align-items: center;
@@ -393,10 +392,9 @@ header.scrolled {
 /* BOTÕES GERAIS */
 .btn-primary, .btn-sm.shine-effect {
     position: relative;
-    /* CORREÇÃO 2: Força o corte da animação dentro da borda */
     overflow: hidden;
-    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Hack para Safari/Mobile */
-    z-index: 1; /* Garante contexto de empilhamento */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    z-index: 1;
 }
 
 .btn-primary::before, .btn-sm.shine-effect::before {
@@ -414,7 +412,7 @@ header.scrolled {
     );
     transform: skewX(-25deg);
     animation: shine 3s infinite;
-    z-index: -1; /* Fica atrás do texto */
+    z-index: -1;
 }
 
 @keyframes shine {
@@ -450,7 +448,6 @@ header.scrolled {
     font-weight: 700;
     font-family: var(--font-heading);
     position: relative;
-    /* Reforço da proteção contra vazamento */
     overflow: hidden;
     border: none;
     transition: all 0.3s ease;
@@ -479,19 +476,19 @@ header.scrolled {
    2. DORES (CARROSSEL INFINITO)
    ========================================= */
 #dores {
-    padding: 60px 0; /* Padding reduzido */
+    padding: 60px 0;
     background-color: var(--bg-page);
-    overflow: hidden; /* Importante para não criar barra de rolagem horizontal */
+    overflow: hidden;
 }
 
 /* Cabeçalho Compacto */
 .section-header.compact-header {
     text-align: center;
-    margin-bottom: 30px; /* Reduzido de 60px */
+    margin-bottom: 30px;
 }
 
 .section-header.compact-header h3 {
-    font-size: 1.8rem; /* Reduzido de 2.5rem */
+    font-size: 1.8rem;
     color: var(--primary-red);
     margin-bottom: 5px;
     text-transform: uppercase;
@@ -532,7 +529,6 @@ header.scrolled {
     display: flex;
     gap: 30px;
     width: max-content; 
-    /* Aumentei a velocidade mudando de 20s para 12s */
     animation: scroll-loop 17s linear infinite;
 }
 
@@ -552,7 +548,7 @@ header.scrolled {
 
 /* Estilo dos Cards no Carrossel */
 .slide-item {
-    width: 320px; /* Largura fixa */
+    width: 320px;
     flex-shrink: 0;
     background: var(--bg-card);
     padding: 40px 30px;
@@ -616,15 +612,40 @@ header.scrolled {
     gap: 40px;
 }
 
-/* 2.1 NOVA SEÇÃO: SOBRE O PRODUTO */
+/* =========================================
+   2.1 SEÇÃO: SOBRE O PRODUTO (ATUALIZADA)
+   ========================================= */
 #sobre {
     padding: 100px 0;
     background-color: var(--bg-page);
 }
 
-.grid-sobre {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* Layout Flex para dividir Imagem e Conteúdo */
+.sobre-layout {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* Lado Esquerdo: Imagem */
+.sobre-img-container {
+    flex: 1;
+    text-align: center;
+}
+
+.img-vertical-sobre {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: cover;
+}
+
+/* Lado Direito: Coluna de Cards */
+.sobre-cards-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     gap: 40px;
 }
 
@@ -634,13 +655,20 @@ header.scrolled {
     border-radius: 12px;
     position: relative;
     color: #000000;
-    margin-top: 25px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     transition: transform 0.3s;
+    width: 100%;
 }
 
 .card-rotulo:hover {
     transform: translateY(-5px);
+}
+
+/* ANIMAÇÃO DE BALANÇO SUTIL */
+@keyframes balanco-sutil {
+    0% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
 }
 
 .rotulo-tag {
@@ -657,15 +685,136 @@ header.scrolled {
     top: -20px;
     left: 20px;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-    transform: rotate(-1deg);
+    animation: balanco-sutil 3s infinite ease-in-out;
 }
 
 .card-rotulo p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.5;
     font-weight: 600;
-    /* text-transform: uppercase; <-- REMOVIDO */
-    margin-top: 15px;
+    margin-top: 10px;
+}
+
+/* =========================================
+   2.2 NOVA SEÇÃO: VIDEO PROMO (ABAIXO DO B2B)
+   ========================================= */
+#video-promo {
+    padding: 100px 0;
+    background-color: var(--bg-page);
+}
+
+.video-promo-layout {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.video-promo-container {
+    flex: 1;
+    text-align: center;
+}
+
+.video-vertical-element {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: block;
+}
+
+.video-promo-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.video-promo-content h3 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    color: var(--white);
+}
+
+.video-promo-content p {
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+/* RESPONSIVO SEÇÃO SOBRE E VIDEO (FULL WIDTH MOBILE) */
+@media (max-width: 900px) {
+    /* SOBRE */
+    #sobre {
+        padding-top: 0;
+        padding-bottom: 60px;
+    }
+
+    .sobre-layout {
+        flex-direction: column;
+        gap: 40px;
+        margin: 0 -20px;
+        width: auto;
+    }
+    
+    .sobre-img-container {
+        width: 100%;
+        order: 1;
+        margin: 0;
+    }
+    
+    .img-vertical-sobre {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+        display: block;
+    }
+
+    .sobre-cards-column {
+        width: 100%;
+        order: 2;
+        gap: 35px;
+        padding: 0 20px;
+    }
+
+    /* VIDEO PROMO MOBILE */
+    #video-promo {
+        padding-top: 0;
+        padding-bottom: 60px;
+    }
+
+    .video-promo-layout {
+        flex-direction: column;
+        gap: 40px;
+        margin: 0 -20px; /* Full bleed */
+        width: auto;
+    }
+
+    .video-promo-container {
+        width: 100%;
+        order: 1;
+        margin: 0;
+    }
+
+    .video-vertical-element {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .video-promo-content {
+        width: 100%;
+        order: 2;
+        padding: 0 20px;
+        align-items: center; /* Centraliza botão e texto no mobile */
+        text-align: center;
+    }
+    
+    .video-promo-content h3 {
+        font-size: 2rem;
+    }
 }
 
 /* 3. SPLIT (USO) */
@@ -749,8 +898,8 @@ header.scrolled {
     border-radius: var(--radius-card);
     border: 1px solid var(--border-color);
     transition: transform 0.3s;
-    position: relative; /* Necessário para posicionar o número */
-    overflow: hidden; /* Garante que o número não vaze da borda redonda */
+    position: relative;
+    overflow: hidden;
 }
 
 .card-ingrediente:hover {
@@ -765,19 +914,17 @@ header.scrolled {
     right: 15px;
     font-size: 5rem;
     font-weight: 900;
-    opacity: 0.15; /* Opacidade bem baixa */
+    opacity: 0.15;
     font-family: var(--font-heading);
     
-    /* Gradiente Branco/Cinza no Texto */
     background: linear-gradient(180deg, #ffffff 0%, #333333 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     
     z-index: 0;
-    pointer-events: none; /* Não interfere no clique ou seleção */
+    pointer-events: none;
 }
 
-/* Garante que o texto fique por cima do número */
 .card-ingrediente h4, 
 .card-ingrediente p {
     position: relative;
@@ -1108,9 +1255,7 @@ footer {
         border-radius: var(--radius-menu);
     }
 
-    /* .desktop-nav { display: none; } <-- CLASSE REMOVIDA PARA O MENU FUNCIONAR */
-
-    .desktop-btn { display: none; } /* Oculta apenas o botão solto, mantém o menu visível */
+    .desktop-btn { display: none; }
     
     .menu-toggle { display: block; }
 
@@ -1158,12 +1303,11 @@ footer {
     
     .oferta-container { flex-direction: column; gap: 50px; }
     
-    /* CORREÇÃO IMAGEM MOBILE */
     .oferta-img img { 
-        transform: rotate(-2deg); /* Mantém inclinação */
-        max-width: 100%; /* Permite crescer */
-        width: 340px; /* Força um tamanho maior */
-        box-shadow: 0 20px 50px rgba(0,0,0,0.8); /* Mantém a sombra */
+        transform: rotate(-2deg);
+        max-width: 100%;
+        width: 340px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     }
     
     .selo { top: -20px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
@@ -1175,13 +1319,12 @@ footer {
     
     .footer-links { display: flex; flex-direction: column; gap: 20px; }
     
-    /* AJUSTES MOBILE ESPECÍFICOS PARA SEÇÃO FÓRMULA */
     #formula {
-        padding: 60px 0; /* Reduzido de 100px */
+        padding: 60px 0;
     }
 
     #formula .section-header h3 {
-        font-size: 2rem; /* Reduzido o tamanho do título no mobile */
+        font-size: 2rem;
         margin-bottom: 10px;
     }
 }
