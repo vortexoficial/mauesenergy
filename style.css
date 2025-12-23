@@ -160,8 +160,9 @@ header.scrolled {
     vertical-align: middle;
 }
 
-.desktop-nav {
-    display: flex; /* Mantém como flex, o HTML não tem mais essa classe no pai, mas as regras de itens internos podem usar */
+/* CORREÇÃO 1: ALINHAMENTO DO MENU DESKTOP */
+.header-container nav {
+    display: flex;
     align-items: center;
     gap: 35px;
 }
@@ -392,7 +393,10 @@ header.scrolled {
 /* BOTÕES GERAIS */
 .btn-primary, .btn-sm.shine-effect {
     position: relative;
+    /* CORREÇÃO 2: Força o corte da animação dentro da borda */
     overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Hack para Safari/Mobile */
+    z-index: 1; /* Garante contexto de empilhamento */
 }
 
 .btn-primary::before, .btn-sm.shine-effect::before {
@@ -410,6 +414,7 @@ header.scrolled {
     );
     transform: skewX(-25deg);
     animation: shine 3s infinite;
+    z-index: -1; /* Fica atrás do texto */
 }
 
 @keyframes shine {
@@ -445,6 +450,7 @@ header.scrolled {
     font-weight: 700;
     font-family: var(--font-heading);
     position: relative;
+    /* Reforço da proteção contra vazamento */
     overflow: hidden;
     border: none;
     transition: all 0.3s ease;
